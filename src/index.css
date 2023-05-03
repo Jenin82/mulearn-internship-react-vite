@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Poppins:wght@400;500;600&family=Rowdies:wght@700&display=swap');
+
+
+/* 
+	font-family: 'Exo 2', sans-serif;
+	font-family: 'Poppins', sans-serif;
+	font-family: 'Rowdies', cursive; 
+*/
+
+
+h1 {
+	text-align: center;
+	font-weight: 700;
+	font-family: 'Rowdies', cursive;
+	font-size: 5rem;
+	color: orange;
+}
+
+body {
+	background-image: url(https://github.com/Jenin82/IEDC-webpage/blob/main/texture.png?raw=true);
+}
+
+.gold {
+	font-family: 'Exo 2', sans-serif;
+	font-weight: 400;
+	font-size: 2rem;
+	color: chocolate;
+}
