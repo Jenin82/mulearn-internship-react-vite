@@ -28,18 +28,24 @@ export const Login = () => {
 	const [user, setUser] = useState('');
 	const [pass, setPass] = useState('');
 	
-	function onChangeUsername(event:any) {
+	function onChangeUsername(event: React.ChangeEvent<HTMLInputElement> & {
+		target: HTMLFormElement
+	}) {
     setUser(event.target.value);
   }
   
-	function onChangePassword(event:any) {
+	function onChangePassword(event: React.ChangeEvent<HTMLInputElement> & {
+		target: HTMLFormElement
+	}) {
     setPass(event.target.value);
   }
 
 	let navigate = useNavigate();
 
 
-	function handleSubmit(event:any) {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement> & {
+		target: HTMLFormElement
+	}) {
 		event.preventDefault()
 		users.map(u => {
       if(u.username === user && u.password === pass) {
