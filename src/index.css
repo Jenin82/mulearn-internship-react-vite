@@ -1,43 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Poppins:wght@400;500;600&family=Rowdies:wght@700&display=swap');
-
-
-/* 
-	font-family: 'Exo 2', sans-serif;
-	font-family: 'Poppins', sans-serif;
-	font-family: 'Rowdies', cursive; 
-*/
-
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	background-color: e0eef3;
-	font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-	background-image: url(https://github.com/Jenin82/IEDC-webpage/blob/main/texture.png?raw=true);
+  background: #c7c6c6;
+  color: #F2F2F2;
+  min-height: 100vh;
 }
 
-.main-container {
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
-input{
-	height: 35px;
-	width: 165px;
-	background-color: white;
-	border-radius: 15px;
-	padding: 10px;
-	border: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-li{
-	margin-top: 15px;
-	
+button {
+  cursor: pointer;
 }
