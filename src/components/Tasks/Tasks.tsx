@@ -1,4 +1,4 @@
-import { Task } from '../Task';
+import { Task } from '../Task/Task';
 import styles from './tasks.module.css';
 
 export function Tasks({ tasks, onDelete, onComplete }:any) {
@@ -18,11 +18,10 @@ export function Tasks({ tasks, onDelete, onComplete }:any) {
           <span>{completedTasks} of {tasksQuantity}</span>
         </div>
       </header>
-
       <div className={styles.list}>
         {tasks.map((task:any) => (
-          <Task key={task.id} task={task} onDelete={onDelete} onComplete={onComplete} />
-        ))}
+					<Task key={task.id} task={task} onDelete={onDelete} onComplete={onComplete} />
+					))}
       </div>
     </section>
   )

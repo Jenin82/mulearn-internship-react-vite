@@ -9,8 +9,17 @@ interface user {
 	password: string;
 }
 
+type newUser = (
+  user
+  | {
+      id: `${string}-${string}-${string}-${string}-${string}`;
+      username: string;
+      password: string;
+    }
+)[];
+
 export const Register: React.FC = () => {
-	const [users, setUsers] = useState<user[]>([])
+	const [users, setUsers] = useState<newUser>([])
 
 	function loadSavedTasks() {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY1);
@@ -19,7 +28,7 @@ export const Register: React.FC = () => {
     }
   }
 
-  function setTasksAndSave(newUsers: any) {
+  function setTasksAndSave(newUsers: newUser) {
     setUsers(newUsers);
     localStorage.setItem(LOCAL_STORAGE_KEY1, JSON.stringify(newUsers));
   }
@@ -28,12 +37,14 @@ export const Register: React.FC = () => {
     loadSavedTasks();
   }, [])
 
+
 	function addUser(userName:string, userPass:string) {
-    setTasksAndSave([...users, {
+		const newUsers = [...users, {
       id: crypto.randomUUID(),
       username: userName,
       password: userPass
-    }]);
+    }]
+    setTasksAndSave(newUsers);
   }
 
 	let navigate = useNavigate();

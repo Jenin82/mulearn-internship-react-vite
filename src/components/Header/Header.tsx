@@ -17,14 +17,15 @@ export function Header({ handleAddTask }:any) {
   }
 
   return (
-    <header className={styles.header}>
-			<div className={styles.headerText}>
-				<h1 className={styles.Text}>TODO</h1>
-			</div>
-      <form onSubmit={handleSubmit} className={styles.newTaskForm}>
-        <input placeholder="Add a new task" type="text" onChange={onChangeTitle} value={title} />
-        <button>Create <AiOutlinePlusCircle size={20} /></button>
-      </form>
-    </header>
+		<div className={styles.container}>
+			<header className={styles.header}>
+				<div className={styles.headerText}>
+					<h1 className={styles.Text}>TODO</h1>
+				</div>
+				<form onSubmit={handleSubmit} className={styles.newTaskForm}>
+					<input placeholder="Add a new task" type="text" onChange={onChangeTitle} value={title} />
+				</form>
+			</header>
+		</div>
   )
 }
