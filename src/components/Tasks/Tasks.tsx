@@ -1,7 +1,19 @@
 import { Task } from '../Task/Task';
 import styles from './tasks.module.css';
 
-export function Tasks({ tasks, onDelete, onComplete }:any) {
+interface item {
+	id: string;
+	title: string;
+	isCompleted: boolean;
+}
+
+type nitem = { 
+	tasks: item[]; 
+	onDelete: (taskId: string) => void; 
+	onComplete: (taskId: string) => void; 
+}
+
+export function Tasks({ tasks, onDelete, onComplete }:nitem) {
   const tasksQuantity = tasks.length;
   const completedTasks = tasks.filter((task:any) => task.isCompleted).length;
 
@@ -19,7 +31,7 @@ export function Tasks({ tasks, onDelete, onComplete }:any) {
         </div>
       </header>
       <div className={styles.list}>
-        {tasks.map((task:any) => (
+        {tasks.map((task) => (
 					<Task key={task.id} task={task} onDelete={onDelete} onComplete={onComplete} />
 					))}
       </div>

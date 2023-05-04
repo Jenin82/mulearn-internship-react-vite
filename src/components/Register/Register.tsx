@@ -52,18 +52,24 @@ export const Register: React.FC = () => {
 	const [user, setUser] = useState('');
 	const [pass, setPass] = useState('');
 
-  function handleSubmit(event:any) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement> & {
+		target: HTMLFormElement
+	}) {
     event.preventDefault();
 		navigate("/login");
     addUser(user, pass);
     setUser('');
   }
 
-  function onChangeUsername(event:any) {
+  function onChangeUsername(event: React.ChangeEvent<HTMLInputElement> & {
+		target: HTMLFormElement
+	}) {
     setUser(event.target.value);
   }
   
-	function onChangePassword(event:any) {
+	function onChangePassword(event: React.ChangeEvent<HTMLInputElement> & {
+		target: HTMLFormElement
+	}) {
     setPass(event.target.value);
   }
 

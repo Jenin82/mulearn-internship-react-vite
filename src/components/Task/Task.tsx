@@ -2,7 +2,19 @@ import styles from './task.module.css';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { TbTrash } from 'react-icons/tb';
 
-export function Task({ task, onDelete, onComplete }:any) {
+interface item {
+	id: string;
+	title: string;
+	isCompleted: boolean;
+}
+
+type titem = { 
+	key: string; task: item; 
+	onDelete: (taskId: string) => void; 
+	onComplete: (taskId: string) => void; 
+}
+
+export function Task({ task, onDelete, onComplete }:titem) {
   return (
 		<div>
 			<hr />
