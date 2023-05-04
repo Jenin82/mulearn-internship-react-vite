@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from './login.module.css';
+
 
 
 const LOCAL_STORAGE_KEY1 = 'todo:register';
@@ -56,13 +58,28 @@ export const Login = () => {
   }
 
 	return (
-		<header className={''}>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit} className={''}>
-        <input placeholder="Enter a username" type="text" onChange={onChangeUsername} value={user} />
-        <input placeholder="Enter your Password" type="password" onChange={onChangePassword} value={pass} />
-        <button>Login</button>
-      </form>
+		<header className={styles.loginContainer}>
+			<div className={styles.wrapper}>
+				<div className={styles.title}>
+					Login
+				</div>
+				<form onSubmit={handleSubmit} className={styles.formLogin}>
+					<div className={styles.field}>
+						<input className={styles.loginInput} type="text" onChange={onChangeUsername} value={user} required />
+						<label>Username</label>
+					</div>
+					<div className={styles.field}>
+						<input className={styles.loginInput} type="password" onChange={onChangePassword} value={pass} required />
+						<label>Password</label>
+					</div>
+					<div className={styles.field}>
+						<input className={styles.loginInput} type="submit" value="Login" />
+					</div>
+					<div className={styles.signup_link}>
+						Not a user? <a className={styles.anchorlogin} href="/register">Signup now</a>
+					</div>
+				</form>
+			</div>
     </header>
 	)
 }

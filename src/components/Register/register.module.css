@@ -1,0 +1,65 @@
+.form1 {
+	width: 100%;
+  border: none;
+  padding: 16px;
+  display: flex;
+	flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+	border-radius: 8px;
+	margin-top: 3rem;
+}
+
+.input1 {
+	height: 30px;
+	width: 95%;
+	border-radius: 8px;
+	border: 1px solid gray;
+}
+
+.btnReg {
+	height: 30px;
+	width: 50%;
+	color: white;
+	background-color: blueviolet;
+	border-radius: 8px;
+}
+
+.form_container{
+	margin: 0 auto;
+	position: relative;
+	background-color: white;
+	max-width: 500px;
+	border-radius: 8px;
+}
+
+.bg_image_container {
+	height: 10px;
+}
+
+.bg_image {
+	height: 15rem;
+	display: block;
+	object-fit: cover;
+	width: 100vw;
+}
+
+.header {
+	/* background: #7625e0; */
+	display: block;
+  justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.headerText{
+  width: 100%;
+	text-align: center;
+	margin-top: 3rem;
+	font-size: 2rem;
+}
+
+.text{
+	margin-right: auto;
+}
