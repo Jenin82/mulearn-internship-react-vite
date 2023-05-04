@@ -17,11 +17,14 @@ export function Header({ handleAddTask }:any) {
 
   return (
 		<div className={styles.container}>
+			<div className={styles.bg_image_container}>
+				<img className={styles.bg_image} src="https://wallpaperaccess.com/full/1630412.jpg" alt="" />
+			</div>
 			<header className={styles.header}>
 				<div className={styles.headerText}>
 					<h1 className={styles.Text}>TODO</h1>
 				</div>
-				<form onSubmit={handleSubmit} className={styles.newTaskForm}>
+				<form onSubmit={handleSubmit} className={styles.newTaskForm}> 
 					<input placeholder="Add a new task" type="text" onChange={onChangeTitle} value={title} />
 				</form>
 			</header>

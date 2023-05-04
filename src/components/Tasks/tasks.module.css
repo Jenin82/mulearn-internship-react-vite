@@ -3,11 +3,12 @@
   max-width: 704px;
   margin: 0 auto;
   padding: 0 1rem;
-	bottom: 100px;
+	bottom: 10px;
 	background-color: white;
   width: 100%;
 	border-radius: 8px;
-
+	z-index: 15;
+	position: relative;
 }
 
 .header {
@@ -35,7 +36,7 @@
 }
 
 .header span {
-  background: #6607a1;
+  background: #7625e0;
   color: #D9D9D9;
   padding: 3px 9px;
   border-radius: 999px;

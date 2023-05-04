@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #c7c6c6;
+  background: rgb(228, 230, 233);
   color: #F2F2F2;
   min-height: 100vh;
 }
@@ -14,3 +14,4 @@ body {
 button {
   cursor: pointer;
 }
+

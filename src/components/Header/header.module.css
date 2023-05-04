@@ -1,9 +1,22 @@
 .container{
-	background: #6c03c7;
+	/* background: #7625e0; */
 	position: relative;
 }
 
+.bg_image_container {
+	height: 10px;
+}
+
+.bg_image {
+	height: 15rem;
+	display: block;
+	object-fit: cover;
+	width: 100vw;
+}
+
 .header {
+	/* background: #7625e0; */
+	z-index: 10;
 	bottom: -38px;
   display: flex;
   justify-content: center;
