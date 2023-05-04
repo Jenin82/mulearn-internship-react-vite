@@ -1,7 +1,7 @@
 import { Task } from '../Task';
 import styles from './tasks.module.css';
 
-export function Tasks({ tasks, onDelete, onComplete }) {
+export function Tasks({ tasks, onDelete, onComplete }:any) {
   const tasksQuantity = tasks.length;
   const completedTasks = tasks.filter(task => task.isCompleted).length;
 
