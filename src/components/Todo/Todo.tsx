@@ -5,7 +5,7 @@ import { Tasks } from "../Tasks/Tasks";
 const LOCAL_STORAGE_KEY = 'todo:tasks';
 
 interface item {
-	id: number;
+	id: string;
 	title: string;
 	isCompleted: boolean;
 }
@@ -20,7 +20,7 @@ function Todo() {
     }
   }
 
-  function setTasksAndSave(newTasks: any) {
+  function setTasksAndSave(newTasks: item[]) {
     setTasks(newTasks);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
   }
@@ -30,20 +30,21 @@ function Todo() {
   }, [])
 
   function addTask(taskTitle:string) {
-    setTasksAndSave([...tasks, {
+		const nTask = [...tasks, {
       id: crypto.randomUUID(),
       title: taskTitle,
       isCompleted: false
-    }]);
+    }]
+    setTasksAndSave(nTask);
   }
 
-  function deleteTaskById(taskId:number) {
+  function deleteTaskById(taskId:string) {
     const newTasks = tasks.filter(task => task.id !== taskId);
     setTasksAndSave(newTasks);
   }
 
 
-  function toggleTaskCompletedById(taskId:number) {
+  function toggleTaskCompletedById(taskId:string) {
     const newTasks = tasks.map(task => {
       if(task.id === taskId) {
         return {
