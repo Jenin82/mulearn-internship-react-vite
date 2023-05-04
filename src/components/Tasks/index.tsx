@@ -3,7 +3,7 @@ import styles from './tasks.module.css';
 
 export function Tasks({ tasks, onDelete, onComplete }:any) {
   const tasksQuantity = tasks.length;
-  const completedTasks = tasks.filter(task => task.isCompleted).length;
+  const completedTasks = tasks.filter((task:any) => task.isCompleted).length;
 
   return (
     <section className={styles.tasks}>
@@ -20,7 +20,7 @@ export function Tasks({ tasks, onDelete, onComplete }:any) {
       </header>
 
       <div className={styles.list}>
-        {tasks.map((task) => (
+        {tasks.map((task:any) => (
           <Task key={task.id} task={task} onDelete={onDelete} onComplete={onComplete} />
         ))}
       </div>
