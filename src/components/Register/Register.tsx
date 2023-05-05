@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react"
-import {useNavigate } from 'react-router-dom'
 import styles from './register.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
