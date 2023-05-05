@@ -6,6 +6,17 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.bg_image_container {
+	height: 10px;
+}
+
+.bg_image {
+	height: 15rem;
+	display: block;
+	object-fit: cover;
+	width: 100vw;
+}
+
 .loginContainer {
 	display: flex;
 	align-items: center;

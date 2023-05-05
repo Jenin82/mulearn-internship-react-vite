@@ -58,28 +58,33 @@ export const Login = () => {
   }
 
 	return (
-		<header className={styles.loginContainer}>
-			<div className={styles.wrapper}>
-				<div className={styles.title}>
-					Login
-				</div>
-				<form onSubmit={handleSubmit} className={styles.formLogin}>
-					<div className={styles.field}>
-						<input className={styles.loginInput} type="text" onChange={onChangeUsername} value={user} required />
-						<label>Username</label>
-					</div>
-					<div className={styles.field}>
-						<input className={styles.loginInput} type="password" onChange={onChangePassword} value={pass} required />
-						<label>Password</label>
-					</div>
-					<div className={styles.field}>
-						<input className={styles.loginInput} type="submit" value="Login" />
-					</div>
-					<div className={styles.signup_link}>
-						Not a user? <a className={styles.anchorlogin} href="/register">Signup now</a>
-					</div>
-				</form>
+		<div>
+			<div className={styles.bg_image_container}>
+				<img className={styles.bg_image} src="https://wallpaperaccess.com/full/1630412.jpg" alt="" />
 			</div>
-    </header>
+			<header className={styles.loginContainer}>
+				<div className={styles.wrapper}>
+					<div className={styles.title}>
+						Login
+					</div>
+					<form onSubmit={handleSubmit} className={styles.formLogin}>
+						<div className={styles.field}>
+							<input className={styles.loginInput} type="text" onChange={onChangeUsername} value={user} required />
+							<label>Username</label>
+						</div>
+						<div className={styles.field}>
+							<input className={styles.loginInput} type="password" onChange={onChangePassword} value={pass} required />
+							<label>Password</label>
+						</div>
+						<div className={styles.field}>
+							<input className={styles.loginInput} type="submit" value="Login" />
+						</div>
+						<div className={styles.signup_link}>
+							Not a user? <a className={styles.anchorlogin} href="/register">Signup now</a>
+						</div>
+					</form>
+				</div>
+			</header>
+		</div>
 	)
 }
