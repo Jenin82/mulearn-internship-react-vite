@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.css';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const LOCAL_STORAGE_KEY1 = 'todo:register';
-
 
 interface user {
 	id: number;
@@ -44,17 +44,33 @@ export const Login = () => {
 
 	let navigate = useNavigate();
 
+	const notify = () => toast.error('Invalid Username or Password', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+
+	var flag: boolean = true;
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement> & {
 		target: HTMLFormElement
 	}) {
 		event.preventDefault()
-		users.map(u => {
+		if(users.map(u => {
       if(u.username === user && u.password === pass) {
 				console.log("login successful")
+				flag = false;
 				navigate("/todo");
       }
-    })
+    }))
+		if(flag) {
+			notify();
+		}
   }
 
 	return (
@@ -79,6 +95,7 @@ export const Login = () => {
 						<div className={styles.field}>
 							<input className={styles.loginInput} type="submit" value="Login" />
 						</div>
+						<ToastContainer />
 						<div className={styles.signup_link}>
 							Not a user? <a className={styles.anchorlogin} href="/register">Signup now</a>
 						</div>
