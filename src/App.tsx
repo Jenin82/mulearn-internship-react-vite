@@ -10,7 +10,7 @@ function App() {
 			<Routes>
 				<Route path='/todo' element={<Todo />} />
 				<Route path='/register' element={<Register />} />
-				<Route path="/" element={<Navigate to="/todo" />}></Route>
+				<Route path="/" element={<Navigate to="/login" />}></Route>
 				<Route path='/login' element={<Login />} />
 				<Route path='*' element={<ErrorPage />} />
 			</Routes>

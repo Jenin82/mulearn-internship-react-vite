@@ -76,21 +76,37 @@ export const Register: React.FC = () => {
   }
 
   return (
-    <header className={styles.container}>
+		<div className={styles.container}>
 			<div className={styles.bg_image_container}>
 				<img className={styles.bg_image} src="https://wallpaperaccess.com/full/1630412.jpg" alt="" />
 			</div>
-			<div className={styles.headerText}>
-					<h1 className={styles.Text}>Register</h1>
-			</div>
-			<div className={styles.form_container} >
-				<form onSubmit={handleSubmit} className={styles.form1}>
-					<input className={styles.input1} placeholder=" Enter a username" type="text" onChange={onChangeUsername} value={user} />
-					<input className={styles.input1} placeholder=" Enter your Password" type="password" onChange={onChangePassword} value={pass} />
-					<input className={styles.input1} placeholder=" Confirm your Password" type="password" />
-					<button className={styles.btnReg}>Register</button>
-				</form>
-			</div>
-    </header>
+			<header className={styles.loginContainer}>
+				<div className={styles.wrapper}>
+					<div className={styles.title}>
+						Register
+					</div>
+					<form onSubmit={handleSubmit} className={styles.formLogin}>
+						<div className={styles.field}>
+							<input className={styles.loginInput} type="text" onChange={onChangeUsername} value={user} required />
+							<label>Username</label>
+						</div>
+						<div className={styles.field}>
+							<input className={styles.loginInput} type="password" onChange={onChangePassword} value={pass} required />
+							<label>Password</label>
+						</div>
+						<div className={styles.field}>
+							<input className={styles.loginInput} type="password" required />
+							<label>Confirm Password</label>
+						</div>
+						<div className={styles.field}>
+							<input className={styles.loginInput} type="submit" value="Login" />
+						</div>
+						<div className={styles.signup_link}>
+							Already a user? <a className={styles.anchorlogin} href="/login">Login here</a>
+						</div>
+					</form>
+				</div>
+			</header>
+		</div>
   )
 }

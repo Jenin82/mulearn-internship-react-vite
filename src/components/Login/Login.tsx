@@ -58,7 +58,7 @@ export const Login = () => {
   }
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.bg_image_container}>
 				<img className={styles.bg_image} src="https://wallpaperaccess.com/full/1630412.jpg" alt="" />
 			</div>
