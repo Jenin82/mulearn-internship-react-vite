@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react"
 import {useNavigate } from 'react-router-dom'
 import styles from './register.module.css';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LOCAL_STORAGE_KEY1 = 'todo:register';
 
@@ -49,18 +50,71 @@ export const Register: React.FC = () => {
     setTasksAndSave(newUsers);
   }
 
-	let navigate = useNavigate();
-
 	const [user, setUser] = useState('');
 	const [pass, setPass] = useState('');
+	const [pass1, setPass1] = useState('');
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement> & {
-		target: HTMLFormElement
-	}) {
+	const resetForm = () => {
+    setUser("")
+    setPass("")
+    setPass1("")
+  }
+
+	const notify1 = () => toast.error('Username already exists, try another one.', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+	
+		const notify2 = () => toast.success('Registed successfully, Login to continue.', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+		
+		const notify3 = () => toast.error('Passwords don\'t match', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+
+	var flag: boolean = false;
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) {
     event.preventDefault();
-		navigate("/login");
-    addUser(user, pass);
-    setUser('');
+		if(users.map(u => {
+      if(u.username === user) {
+				flag = true;
+      }
+    }))
+		if(flag) {
+			notify1();
+		}
+		else {
+			if(pass === pass1) {
+				notify2();
+				addUser(user, pass);
+			}
+			else {
+				notify3();
+			}
+		}
+		resetForm();
   }
 
   function onChangeUsername(event: React.ChangeEvent<HTMLInputElement> & {
@@ -73,6 +127,9 @@ export const Register: React.FC = () => {
 		target: HTMLFormElement
 	}) {
     setPass(event.target.value);
+  }
+	function onChangePassword1(event: React.ChangeEvent<HTMLInputElement> & {target: HTMLFormElement}) {
+    setPass1(event.target.value);
   }
 
   return (
@@ -95,15 +152,16 @@ export const Register: React.FC = () => {
 							<label>Password</label>
 						</div>
 						<div className={styles.field}>
-							<input className={styles.loginInput} type="password" required />
+							<input className={styles.loginInput} type="password" onChange={onChangePassword1} value={pass1} required />
 							<label>Confirm Password</label>
 						</div>
 						<div className={styles.field}>
-							<input className={styles.loginInput} type="submit" value="Login" />
+							<input className={styles.loginInput} type="submit" value="Register" />
 						</div>
 						<div className={styles.signup_link}>
 							Already a user? <a className={styles.anchorlogin} href="/login">Login here</a>
 						</div>
+						<ToastContainer />
 					</form>
 				</div>
 			</header>
