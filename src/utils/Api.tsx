@@ -2,9 +2,10 @@ export const API_HOST = 'http://127.0.0.1:8000';
 
 export const endpoints = {
   login: '/api/token/',
-  logout: '/api/auth/logout',
   signup: '/api/register/',
+	todo: '/api/todo/',
   token: '/api/token/refresh/',
+  logout: '/api/auth/logout',
   user: '/api/users/me',
 };
 

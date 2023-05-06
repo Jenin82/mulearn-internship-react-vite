@@ -3,7 +3,7 @@ import styles from './register.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { endpoints, fetchWrapper } from "../../utils/Api";
-import { clearUserData } from "../../utils/Auth";
+// import { clearUserData } from "../../utils/Auth";
 
 
 export const Register: React.FC = () => {
@@ -61,7 +61,7 @@ export const Register: React.FC = () => {
 		});
 		if(pass === pass1) {
 			if (response.ok) {
-				clearUserData();
+				// clearUserData();
 				console.log('User created successfully');
 				setUser("")
 				notify2();

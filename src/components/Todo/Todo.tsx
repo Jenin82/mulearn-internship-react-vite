@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Header } from "../Header/Header";
 import { Tasks } from "../Tasks/Tasks";
+import { getAccessToken} from "../../utils/Auth";
+import { endpoints, fetchWrapper } from "../../utils/Api";
 
 const LOCAL_STORAGE_KEY = 'todo:tasks';
 
@@ -11,23 +13,40 @@ interface item {
 }
 
 function Todo() {
-  const [tasks, setTasks] = useState<item[]>([]);
+	const accessToken:string = getAccessToken();
 
-  function loadSavedTasks() {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if(saved) {
-      setTasks(JSON.parse(saved));
+	useEffect(() => {
+		getTodo();
+	}, []);
+	
+
+	const getTodo = async () =>{
+		const response = await fetchWrapper(endpoints.todo, {
+      method: 'GET',
+      headers: { 
+				'Content-Type': 'application/json',
+				'Authorization':'Bearer ' + accessToken,
+			}
+    });
+    if (response.ok) {
+      const todoData = await response.json();
+			setTasks(todoData);
+			console.log(todoData);
+			console.log(todoData[0].title);
+			console.log("Get successful")
+		
     }
+		else{
+			console.log("Get failed: " + response)
+		}
   }
+
+  const [tasks, setTasks] = useState<item[]>([]);
 
   function setTasksAndSave(newTasks: item[]) {
     setTasks(newTasks);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
   }
-
-  useEffect(() => {
-    loadSavedTasks();
-  }, [])
 
   function addTask(taskTitle:string) {
 		const nTask = [...tasks, {

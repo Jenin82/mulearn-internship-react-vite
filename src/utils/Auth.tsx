@@ -33,20 +33,21 @@ export function clearUserData(): void {
 
 export const getRefreshToken = () => {
   if (typeof Storage === 'undefined') return false;
-  return JSON.parse(localStorage.getItem('user') || '{}')?.refreshToken;
+  return JSON.parse(localStorage.getItem('user') || '{}')?.refresh;
 };
 
 export const getAccessToken = () => {
   if (typeof Storage === 'undefined') {
     return new Error('Storage type not valid');
   }
-  return JSON.parse(localStorage.getItem('user') || '{}')?.accessToken;
+	let accessToken = JSON.parse(localStorage.getItem('user') || '{}')?.access;
+	return accessToken;
 };
 
 export const updateAccessToken = (token: string): void => {
   if (typeof Storage === 'undefined') return;
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  user.accessToken = token;
+  user.access = token;
   localStorage.setItem('user', JSON.stringify(user));
 };
 

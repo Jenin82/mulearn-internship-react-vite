@@ -28,7 +28,7 @@ function AuthProvider({ children }: any) {
 
   const handleLogin = (userData: Partial<TUser>) => {
     setUserData(userData);
-    const origin = (location.state as LocationState)?.from?.pathname || '/home';
+    const origin = (location.state as LocationState)?.from?.pathname || '/';
     navigate(origin);
   };
 
@@ -66,17 +66,15 @@ function AuthProvider({ children }: any) {
   useEffect(() => {
     if (refreshToken) {
       // Check on the first render
-      if (isFirstMounted) {
-        updateRefreshtoken();
-      }
-
-      // Keep checking after a certain time
-      const intervalId = setInterval(() => {
-        updateRefreshtoken();
-      }, ACCESS_TOKEN_EXPIRES_TIME);
-      return () => clearInterval(intervalId);
+      // if (isFirstMounted) {
+      //   updateRefreshtoken();
+      // }
+			// Keep checking after a certain time
+			const intervalId = setInterval(() => {
+				updateRefreshtoken();
+			}, ACCESS_TOKEN_EXPIRES_TIME);
+			return () => clearInterval(intervalId);
     }
-    return undefined;
   }, [localAccessToken]);
 
   const value = useMemo(() => ({
