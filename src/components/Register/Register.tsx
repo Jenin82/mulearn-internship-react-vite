@@ -1,60 +1,18 @@
-import {useEffect, useState} from "react"
+import {useState} from "react"
 import styles from './register.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { endpoints, fetchWrapper } from "../../utils/Api";
+import { clearUserData } from "../../utils/Auth";
 
-const LOCAL_STORAGE_KEY1 = 'todo:register';
-
-interface user {
-	id: number;
-	username: string;
-	password: string;
-}
-
-type newUser = (
-  user
-  | {
-      id: `${string}-${string}-${string}-${string}-${string}`;
-      username: string;
-      password: string;
-    }
-)[];
 
 export const Register: React.FC = () => {
-	const [users, setUsers] = useState<newUser>([])
-
-	function loadSavedTasks() {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEY1);
-    if(saved) {
-      setUsers(JSON.parse(saved));
-    }
-  }
-
-  function setTasksAndSave(newUsers: newUser) {
-    setUsers(newUsers);
-    localStorage.setItem(LOCAL_STORAGE_KEY1, JSON.stringify(newUsers));
-  }
-
-  useEffect(() => {
-    loadSavedTasks();
-  }, [])
-
-
-	function addUser(userName:string, userPass:string) {
-		const newUsers = [...users, {
-      id: crypto.randomUUID(),
-      username: userName,
-      password: userPass
-    }]
-    setTasksAndSave(newUsers);
-  }
 
 	const [user, setUser] = useState('');
 	const [pass, setPass] = useState('');
 	const [pass1, setPass1] = useState('');
 
 	const resetForm = () => {
-    setUser("")
     setPass("")
     setPass1("")
   }
@@ -92,26 +50,28 @@ export const Register: React.FC = () => {
 		theme: "colored",
 		});
 
-	var flag: boolean = false;
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) => {
     event.preventDefault();
-		if(users.map(u => {
-      if(u.username === user) {
-				flag = true;
-      }
-    }))
-		if(flag) {
-			notify1();
-		}
-		else {
-			if(pass === pass1) {
+		const response = await fetchWrapper(endpoints.signup, {
+			method: 'POST',
+			body: {
+				"username": 'user',
+				"password": 'pass'
+			},
+		});
+		if(pass === pass1) {
+			if (response.ok) {
+				clearUserData();
+				console.log('User created successfully');
+				setUser("")
 				notify2();
-				addUser(user, pass);
 			}
 			else {
-				notify3();
+				notify1();
 			}
+		}
+		else {
+			notify3();
 		}
 		resetForm();
   }
