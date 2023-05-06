@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const LOCAL_STORAGE_KEY1 = 'todo:register';
@@ -85,11 +86,11 @@ export const Login = () => {
 					</div>
 					<form onSubmit={handleSubmit} className={styles.formLogin}>
 						<div className={styles.field}>
-							<input className={styles.loginInput} type="text" onChange={onChangeUsername} value={user} required />
+							<input className={styles.loginInput} type="text" name="user" onChange={onChangeUsername} value={user} required />
 							<label>Username</label>
 						</div>
 						<div className={styles.field}>
-							<input className={styles.loginInput} type="password" onChange={onChangePassword} value={pass} required />
+							<input className={styles.loginInput} type="password" name="pass" onChange={onChangePassword} value={pass} required />
 							<label>Password</label>
 						</div>
 						<div className={styles.field}>
