@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from './login.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from "../../utils/Auth";
+import { endpoints, fetchWrapper } from "../../utils/Api";
 
 
 
@@ -56,20 +58,25 @@ export const Login = () => {
 		theme: "colored",
 		});
 
-	var flag: boolean = true;
+	const { onLogin } = useAuth();
 
-	function handleSubmit(event: React.FormEvent<HTMLFormElement> & {
-		target: HTMLFormElement
-	}) {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) =>{
 		event.preventDefault()
-		if(users.map(u => {
-      if(u.username === user && u.password === pass) {
-				console.log("login successful")
-				flag = false;
-				navigate("/todo");
-      }
-    }))
-		if(flag) {
+		const response = await fetchWrapper(endpoints.login, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: {
+				"username": user,
+				"password": pass
+      },
+    });
+    if (response.ok) {
+      const userData = await response.json();
+      onLogin(userData);
+			console.log("login successful")
+			navigate("/todo");
+    }
+		else{
 			notify();
 		}
   }
