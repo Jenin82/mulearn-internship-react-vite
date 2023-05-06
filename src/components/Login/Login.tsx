@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,41 +7,16 @@ import { useAuth } from "../../utils/Auth";
 import { endpoints, fetchWrapper } from "../../utils/Api";
 
 
-
-const LOCAL_STORAGE_KEY1 = 'todo:register';
-
-interface user {
-	id: number;
-	username: string;
-	password: string;
-}
-
 export const Login = () => {
-	const [users, setUsers] = useState<user[]>([])
-
-	function loadSavedTasks() {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEY1);
-    if(saved) {
-      setUsers(JSON.parse(saved));
-    }
-  }
-
-	useEffect(() => {
-    loadSavedTasks();
-  }, [])
 
 	const [user, setUser] = useState('');
 	const [pass, setPass] = useState('');
 	
-	function onChangeUsername(event: React.ChangeEvent<HTMLInputElement> & {
-		target: HTMLFormElement
-	}) {
+	function onChangeUsername(event: React.ChangeEvent<HTMLInputElement> & {target: HTMLFormElement}) {
     setUser(event.target.value);
   }
   
-	function onChangePassword(event: React.ChangeEvent<HTMLInputElement> & {
-		target: HTMLFormElement
-	}) {
+	function onChangePassword(event: React.ChangeEvent<HTMLInputElement> & {target: HTMLFormElement}) {
     setPass(event.target.value);
   }
 
