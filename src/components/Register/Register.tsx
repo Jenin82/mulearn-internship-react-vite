@@ -2,20 +2,17 @@ import {useState} from "react"
 import styles from './register.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { endpoints, fetchWrapper } from "../../utils/Api";
-// import { clearUserData } from "../../utils/Auth";
+import { AxiosError } from "axios";
+import axiosGlobal from "../../api/axios";
 
-
+const REGISTER_URL = 'register/';
 export const Register: React.FC = () => {
 
 	const [user, setUser] = useState('');
 	const [pass, setPass] = useState('');
 	const [pass1, setPass1] = useState('');
 
-	const resetForm = () => {
-    setPass("")
-    setPass1("")
-  }
+
 
 	const notify1 = () => toast.error('Username already exists, try another one.', {
 		position: "bottom-center",
@@ -52,29 +49,41 @@ export const Register: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) => {
     event.preventDefault();
-		const response = await fetchWrapper(endpoints.signup, {
-			method: 'POST',
-			body: {
-				"username": 'user',
-				"password": 'pass'
-			},
-		});
 		if(pass === pass1) {
-			if (response.ok) {
-				// clearUserData();
-				console.log('User created successfully');
-				setUser("")
-				notify2();
-			}
-			else {
-				notify1();
+			try {
+					const response = await axiosGlobal.post(REGISTER_URL,
+							JSON.stringify({ username: user, password: pass }),
+							{
+									headers: { 'Content-Type': 'application/json' },
+							}
+					);
+					console.log(response);
+					console.log(response?.data);
+					console.log(JSON.stringify(response))
+	
+					setUser('');
+					setPass('');
+					setPass1('');
+					notify2();
+
+			} 
+			catch (err: unknown) {
+				const error = err as AxiosError;
+				if (!error?.response) {
+						console.log('No Server Response');
+				} 
+				else if (error.response?.status === 409) {
+					notify1();
+				} 
+				else {
+						console.log('Registration Failed')
+				}
 			}
 		}
 		else {
 			notify3();
 		}
-		resetForm();
-  }
+	}
 
   function onChangeUsername(event: React.ChangeEvent<HTMLInputElement> & {
 		target: HTMLFormElement

@@ -1,27 +1,34 @@
-import { Register } from "./components/Register/Register";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { ErrorPage } from "./components/ErrorPage/ErrorPage";
-import { Login } from "./components/Login/Login";
+import { Route, Routes } from "react-router-dom";
 import Todo from "./components/Todo/Todo";
-import { PrivateRoutes } from "./utils/PrivateRoutes";
-import AuthProvider from "./contexts/AuthProvider";
+import { Register } from "./components/Register/Register";
+import { Login } from "./components/Login/Login";
+import { ErrorPage } from "./components/ErrorPage/ErrorPage";
+import Layout from "./Layout/Layout";
+import RequireAuth from "./utils/RequireAuth";
+import PersistLogin from "./utils/PersistLogin";
 
 function App() {
+
   return (
-		<Router>
-			<AuthProvider>
-				<Routes>
-					<Route element={<PrivateRoutes/>}>
-						<Route path='/' element={<Todo/>} />
-						<Route path='/todo' element={<Todo/>} />
+    <Routes>
+			<Route path="/" element={<Layout />}>
+				{/* public routes */}
+				<Route path="login" element={<Login />} />
+				<Route path="register" element={<Register />} />
+
+				<Route element={<PersistLogin />}>
+				{/* we want to protect these routes */}
+					<Route element={<RequireAuth />} >
+						<Route path="/" element={<Todo />} />
+						<Route path="todo" element={<Todo />} />
 					</Route>
-					<Route path='/register' element={<Register />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='*' element={<ErrorPage />} />
-				</Routes>
-			</AuthProvider>
-		</Router>
-  )
+				</Route>
+				
+				{/* catch all */}
+				<Route path="*" element={<ErrorPage />} />
+			</Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;
