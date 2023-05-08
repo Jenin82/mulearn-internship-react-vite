@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AxiosError } from "axios";
 import axiosGlobal from "../../api/axios";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const REGISTER_URL = 'register/';
 export const Register: React.FC = () => {
@@ -58,6 +59,8 @@ export const Register: React.FC = () => {
 		theme: "colored",
 		});
 
+	let navigate = useNavigate();
+	
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) => {
     event.preventDefault();
 		if(pass === pass1) {
@@ -71,11 +74,13 @@ export const Register: React.FC = () => {
 					console.log(response);
 					console.log(response?.data);
 					console.log(JSON.stringify(response))
-	
 					setUser('');
 					setPass('');
 					setPass1('');
 					notify2();
+					setTimeout(() => {
+						navigate("/login");
+					}, 3000);
 
 			} 
 			catch (err: unknown) {
