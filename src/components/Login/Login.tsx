@@ -54,7 +54,7 @@ export const Login = () => {
 			localStorage.setItem("access", accessToken);
 			setTimeout(() => {
 				navigate("/todo");
-			}, 3000);
+			}, 1000);
 			console.log("login successful")
 		} 
 		catch (err: unknown) {

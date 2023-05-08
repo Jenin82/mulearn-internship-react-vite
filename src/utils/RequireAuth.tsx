@@ -5,11 +5,11 @@ const access = localStorage.getItem("access");
 
 const RequireAuth = () => {
 	const {auth}:any = useAuth()
-	auth.accessToken = access
+	//auth.accessToken = access
 	const location = useLocation()
-	
+	let a = (auth.accessToken? true : false) || (access? true : false)
 	return (
-		auth?.accessToken
+		a
 			? <Outlet />
 			: <Navigate to="/login" state={{ from: location }} replace />
 	)

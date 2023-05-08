@@ -12,17 +12,17 @@ function App() {
     <Routes>
 			<Route path="/" element={<Layout />}>
 				{/* public routes */}
-				<Route path="login" element={<Login />} />
-				<Route path="register" element={<Register />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
 
 				{/* we want to protect these routes */}
 					<Route element={<RequireAuth />} >
-						<Route path="/" element={<Todo />} />
-						<Route path="todo" element={<Todo />} />
+						<Route path="/" element={<Todo />}/>
+						<Route path="/todo" element={<Todo />} />
 					</Route>
 				
 				{/* catch all */}
-				<Route path="*" element={<ErrorPage />} />
+				<Route path="/*" element={<ErrorPage />} />
 			</Route>
     </Routes>
   );

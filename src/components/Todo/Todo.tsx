@@ -55,6 +55,7 @@ function Todo() {
 	const {auth}:any = useAuth();
 
 	let navigate = useNavigate();
+	const access = localStorage.getItem("access");
 
 	const getTodo = async () => {
 		try {
@@ -62,14 +63,13 @@ function Todo() {
 					{
 						headers: { 
 							'Content-Type': 'application/json',
-							'Authorization': 'Bearer ' + auth.accessToken
+							'Authorization': 'Bearer ' + access
 						}
 					}
 			);
 			const todo:any = (response?.data)
 			console.log(todo)
 			setTasks(todo);
-			console.log(Array.isArray(todo))
 		
 		} 
 		catch (err: unknown) {
