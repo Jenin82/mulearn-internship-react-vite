@@ -9,17 +9,6 @@ const TODO_URL = 'todo/'
 
 export function Header({ handleAddTask }:any) {
 
-	const notify0 = () => toast.success('Success', {
-		position: "bottom-center",
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-		theme: "colored",
-		});
-	
 	const notify3 = () => toast.error('Failed to add new TODOs', {
 		position: "bottom-center",
 		autoClose: 5000,
@@ -53,7 +42,6 @@ export function Header({ handleAddTask }:any) {
 
 				console.log(response)
 				handleAddTask(title);
-				notify0();
 			} 
 			catch (err: unknown) {
 				const error = err as AxiosError;
