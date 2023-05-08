@@ -24,8 +24,7 @@ export const Login = () => {
     setPass(event.target.value);
   }
 
-	let navigate = useNavigate();
-
+	
 	const notify = () => toast.error('Invalid Username or Password', {
 		position: "bottom-center",
 		autoClose: 5000,
@@ -35,9 +34,10 @@ export const Login = () => {
 		draggable: true,
 		progress: undefined,
 		theme: "colored",
-		});
-
-
+	});
+	
+	let navigate = useNavigate();
+	
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) =>{
 		event.preventDefault();
 		try {
@@ -52,8 +52,10 @@ export const Login = () => {
 			setPass('');
 			localStorage.clear();
 			localStorage.setItem("access", accessToken);
+			setTimeout(() => {
+				navigate("/todo");
+			}, 3000);
 			console.log("login successful")
-			navigate("/todo");
 		} 
 		catch (err: unknown) {
 			const error = err as AxiosError;
