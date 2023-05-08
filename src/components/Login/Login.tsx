@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState} from 'react';
 import { AxiosError } from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';	
 import axiosGlobal from '../../api/axios';
 
@@ -15,8 +15,6 @@ export const Login = () => {
 	const [user, setUser] = useState('');
 	const [pass, setPass] = useState('');
 
-	const location = useLocation()
-	const from = location.state?.from?.pathname || '/'
 	
 	function onChangeUsername(event: React.ChangeEvent<HTMLInputElement> & {target: HTMLFormElement}) {
     setUser(event.target.value);
@@ -52,6 +50,7 @@ export const Login = () => {
 			setAuth({ user, pass, accessToken });
 			setUser('');
 			setPass('');
+			localStorage.clear();
 			localStorage.setItem("access", accessToken);
 			console.log("login successful")
 			navigate("/todo");

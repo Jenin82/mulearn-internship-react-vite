@@ -5,7 +5,6 @@ import { Login } from "./components/Login/Login";
 import { ErrorPage } from "./components/ErrorPage/ErrorPage";
 import Layout from "./Layout/Layout";
 import RequireAuth from "./utils/RequireAuth";
-import PersistLogin from "./utils/PersistLogin";
 
 function App() {
 
@@ -16,13 +15,11 @@ function App() {
 				<Route path="login" element={<Login />} />
 				<Route path="register" element={<Register />} />
 
-				<Route element={<PersistLogin />}>
 				{/* we want to protect these routes */}
 					<Route element={<RequireAuth />} >
 						<Route path="/" element={<Todo />} />
 						<Route path="todo" element={<Todo />} />
 					</Route>
-				</Route>
 				
 				{/* catch all */}
 				<Route path="*" element={<ErrorPage />} />

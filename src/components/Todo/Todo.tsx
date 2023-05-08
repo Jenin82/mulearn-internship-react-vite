@@ -4,7 +4,8 @@ import { Tasks } from "../Tasks/Tasks";
 import { axiosPrivate } from "../../api/axios";
 import useAuth from '../../hooks/useAuth';
 import { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 
 const TODO_URL = 'todo/'
@@ -27,41 +28,19 @@ function Todo() {
 		progress: undefined,
 		theme: "colored",
 		});
+
+	const notify3 = () => toast.error('An Error occured, try again', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
 	
-	const notify1 = () => toast.error('Failed to Update status of TODO', {
-		position: "bottom-center",
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-		theme: "colored",
-		});
-
-	const notify2 = () => toast.error('Failed to delete TODO', {
-		position: "bottom-center",
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-		theme: "colored",
-		});
-
-	const notify3 = () => toast.error('Failed to load TODOs', {
-		position: "bottom-center",
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-		theme: "colored",
-		});
-
-	const notify4 = () => toast.error('No Server Response', {
+		const notify5 = () => toast.error('Login expired', {
 		position: "bottom-center",
 		autoClose: 5000,
 		hideProgressBar: false,
@@ -75,6 +54,7 @@ function Todo() {
 	const [tasks, setTasks] = useState<item[]>([]);
 	const {auth}:any = useAuth();
 
+	let navigate = useNavigate();
 
 	const getTodo = async () => {
 		try {
@@ -94,14 +74,9 @@ function Todo() {
 		} 
 		catch (err: unknown) {
 			const error = err as AxiosError;
-			if (!error?.response) {
-					console.log('No Server Response');
-					notify4();
-				} 
-				else {
-					console.log('Get Todo Failed');
-					console.log(error.response);
-					notify3();
+			if (error?.response) {
+				console.log(error.response)
+				//notify3();
 			}
 		}
 	}
@@ -122,19 +97,21 @@ function Todo() {
 					}
 			);
 			const todo:any = (response?.data)
-			console.log(todo)
 			notify0();
+			console.log(todo)
 		} 
 		catch (err: unknown) {
 			const error = err as AxiosError;
-			if (!error?.response) {
-				console.log('No Server Response');
-				notify4();
-			} 
-			else {
-				console.log('PUT Todo Failed');
-				console.log(error.response);
-				notify2();
+			if (error.response?.status === 401){
+				notify5();
+				localStorage.clear();
+				setTimeout(() => {
+					navigate("/login");
+				}, 3000);
+			}
+			else if (error?.response) {
+				console.log(error.response)
+				notify3();
 			}
 		}
 		getTodo();
@@ -164,14 +141,16 @@ function Todo() {
 		} 
 		catch (err: unknown) {
 			const error = err as AxiosError;
-			if (!error?.response) {
-					console.log('No Server Response');
-					notify4();
-				}
-				else {
-					console.log('PUT Todo Failed');
-					console.log(error.response);
-					notify1();
+			if (error.response?.status === 401){
+				notify5();
+				localStorage.clear();
+				setTimeout(() => {
+					navigate("/login");
+				}, 3000);
+			}
+			else if (error?.response) {
+				console.log(error.response)
+				notify3();
 			}
 		}
 		getTodo();
@@ -189,6 +168,7 @@ function Todo() {
 				onDelete={deleteTaskById}
 				onComplete={toggleTaskCompletedById}
 			/>}
+			<ToastContainer />
 		</>
   )
 }
