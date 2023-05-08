@@ -47,6 +47,17 @@ export const Register: React.FC = () => {
 		theme: "colored",
 		});
 
+		const notify4 = () => toast.error('No Server Response', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) => {
     event.preventDefault();
 		if(pass === pass1) {
@@ -70,13 +81,13 @@ export const Register: React.FC = () => {
 			catch (err: unknown) {
 				const error = err as AxiosError;
 				if (!error?.response) {
-						console.log('No Server Response');
-				} 
-				else if (error.response?.status === 409) {
-					notify1();
-				} 
+					console.log('No Server Response');
+					notify4();
+				}
 				else {
-						console.log('Registration Failed')
+					console.log('Registration Failed')
+					console.log(error.response)
+					notify1();
 				}
 			}
 		}

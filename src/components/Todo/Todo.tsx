@@ -4,6 +4,7 @@ import { Tasks } from "../Tasks/Tasks";
 import { axiosPrivate } from "../../api/axios";
 import useAuth from '../../hooks/useAuth';
 import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 
 const TODO_URL = 'todo/'
@@ -16,6 +17,50 @@ interface item {
 
 function Todo() {
 	
+	const notify1 = () => toast.error('Failed to Update status of TODO', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+
+	const notify2 = () => toast.error('Failed to delete TODO', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+
+	const notify3 = () => toast.error('Failed to load TODOs', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+
+	const notify4 = () => toast.error('No Server Response', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+
 	const [tasks, setTasks] = useState<item[]>([]);
 	const {auth}:any = useAuth();
 
@@ -40,10 +85,12 @@ function Todo() {
 			const error = err as AxiosError;
 			if (!error?.response) {
 					console.log('No Server Response');
-			} else if (error.response?.status === 401) {
-					console.log(error.response);
-			} else {
+					notify4();
+				} 
+				else {
 					console.log('Get Todo Failed');
+					console.log(error.response);
+					notify3();
 			}
 		}
 	}
@@ -69,11 +116,13 @@ function Todo() {
 		catch (err: unknown) {
 			const error = err as AxiosError;
 			if (!error?.response) {
-					console.log('No Server Response');
-			} else if (error.response?.status === 401) {
-					console.log(error.response);
-			} else {
-					console.log('PUT Todo Failed');
+				console.log('No Server Response');
+				notify4();
+			} 
+			else {
+				console.log('PUT Todo Failed');
+				console.log(error.response);
+				notify2();
 			}
 		}
 		getTodo();
@@ -104,10 +153,12 @@ function Todo() {
 			const error = err as AxiosError;
 			if (!error?.response) {
 					console.log('No Server Response');
-			} else if (error.response?.status === 401) {
-					console.log(error.response);
-			} else {
+					notify4();
+				}
+				else {
 					console.log('PUT Todo Failed');
+					console.log(error.response);
+					notify1();
 			}
 		}
 		getTodo();
