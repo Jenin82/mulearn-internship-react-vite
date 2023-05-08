@@ -3,10 +3,33 @@ import { axiosPrivate } from '../../api/axios';
 import styles from './header.module.css';
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const TODO_URL = 'todo/'
 
 export function Header({ handleAddTask }:any) {
+
+	const notify0 = () => toast.success('Success', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+	
+	const notify3 = () => toast.error('Failed to add new TODOs', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
 
 	const {auth}:any = useAuth();
   const [title, setTitle] = useState('');
@@ -30,11 +53,13 @@ export function Header({ handleAddTask }:any) {
 
 				console.log(response)
 				handleAddTask(title);
+				notify0();
 			} 
 			catch (err: unknown) {
 				const error = err as AxiosError;
 				if (error?.response) {
 					console.log(error.response)
+					notify3();
 				}
 			}
 		}

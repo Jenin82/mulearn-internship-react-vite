@@ -16,6 +16,17 @@ interface item {
 }
 
 function Todo() {
+
+	const notify0 = () => toast.success('Success', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
 	
 	const notify1 = () => toast.error('Failed to Update status of TODO', {
 		position: "bottom-center",
@@ -112,6 +123,7 @@ function Todo() {
 			);
 			const todo:any = (response?.data)
 			console.log(todo)
+			notify0();
 		} 
 		catch (err: unknown) {
 			const error = err as AxiosError;
@@ -148,6 +160,7 @@ function Todo() {
 			);
 			const todo:any = (response?.data)
 			console.log(todo)
+			notify0();
 		} 
 		catch (err: unknown) {
 			const error = err as AxiosError;
