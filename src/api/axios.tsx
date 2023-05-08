@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'http://127.0.0.1:8000/api/'
+const baseURL = 'https://mulearn-internship-task-production.up.railway.app/api/'
 
 export const axiosGlobal = axios.create({
 	baseURL,
