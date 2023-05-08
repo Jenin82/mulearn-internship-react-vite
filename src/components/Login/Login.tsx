@@ -36,10 +36,22 @@ export const Login = () => {
 		theme: "colored",
 	});
 	
+	const notify1 = () => toast.warning('Logging in...', {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+	});
+	
 	let navigate = useNavigate();
 	
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & {target: HTMLFormElement}) =>{
 		event.preventDefault();
+		notify1()
 		try {
 			const response = await axiosGlobal.post(LOGIN_URL,
 					JSON.stringify({ username: user, password: pass }),
@@ -54,7 +66,7 @@ export const Login = () => {
 			localStorage.setItem("access", accessToken);
 			setTimeout(() => {
 				navigate("/todo");
-			}, 1000);
+			}, 500);
 			console.log("login successful")
 		} 
 		catch (err: unknown) {

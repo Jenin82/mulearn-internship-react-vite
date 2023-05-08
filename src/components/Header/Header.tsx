@@ -92,6 +92,15 @@ export function Header({ handleAddTask }:any) {
     setTitle(event.target.value);
   }
 
+	const {setAuth}:any = useAuth();
+
+	function handleLogout(event:any) {
+    event.preventDefault();
+		localStorage.clear()
+		setAuth({})
+		navigate('/login')
+	}
+
   return (
 		<div className={styles.container}>
 			<div className={styles.bg_image_container}>
@@ -100,6 +109,7 @@ export function Header({ handleAddTask }:any) {
 			<header className={styles.header}>
 				<div className={styles.headerText}>
 					<h1 className={styles.Text}>TODO</h1>
+					<button className={styles.logout} onClick={handleLogout}>Logout</button>
 				</div>
 				<form onSubmit={handleSubmit} className={styles.newTaskForm}> 
 					<input placeholder="Add a new task" type="text" onChange={onChangeTitle} value={title} />
