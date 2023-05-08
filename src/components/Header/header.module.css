@@ -32,18 +32,19 @@
   width: 100%;
 	margin-left: 30px!important;
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
 }
 
 .logout {
 	color: #fff;
+	font-size: 16px;
 	border-radius: 8px;
+	display: inline-block;
 	width: 6rem;
 	border: 0;
+	margin-top: 5px;
+	margin-right: 2rem;
 	height: 2rem;
-	position: absolute;
-	right: 26rem;
-	top: 6px;
 	background-color: rgba(121, 28, 202, 0.628);
 }
 .text{
