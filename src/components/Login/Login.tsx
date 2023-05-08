@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useState} from 'react';
 import { AxiosError } from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';	
 import axiosGlobal from '../../api/axios';
 
 const LOGIN_URL = 'token/';
@@ -52,6 +52,7 @@ export const Login = () => {
 			);
 			console.log(JSON.stringify(response?.data));
 			const accessToken = response?.data?.access;
+			localStorage.setItem('accessToken', accessToken);
 			setAuth({ user, pass, accessToken });
 			setUser('');
 			setPass('');

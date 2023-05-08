@@ -3,15 +3,14 @@ import useAuth from './useAuth';
 
 const useRefreshToken = () => {
     const { setAuth }:any = useAuth();
-		const auth = localStorage.getItem('refresh');
-		console.log(auth);
     const refresh = async () => {
         const response = await axiosPrivate.get('token/refresh/', {
+					headers: { "Content-Type": 'multipart/form-data'}
         });
         setAuth((prev: any) => {
-            console.log(JSON.stringify(prev));
+            console.log(prev);
             console.log(response.data.access);
-            return { ...prev, accessToken: response.data.access }
+            return { ...prev, accessToken: response.data.access, refreshToken: response.data.refresh}
         });
         return response.data.access;
     }

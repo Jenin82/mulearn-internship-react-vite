@@ -1,13 +1,44 @@
+import { AxiosError } from 'axios';
+import { axiosPrivate } from '../../api/axios';
 import styles from './header.module.css';
 import { useState } from 'react';
+import useAuth from '../../hooks/useAuth';
+
+const TODO_URL = 'todo/'
 
 export function Header({ handleAddTask }:any) {
+
+	const {auth}:any = useAuth();
   const [title, setTitle] = useState('');
 
   function handleSubmit(event:any) {
     event.preventDefault();
+		console.log(auth.accessToken)
+		const postTodo = async () => {
+			try {
+				const response = await axiosPrivate.post(TODO_URL,
+					{
+						'title': title
+					},
+					{
+						headers: { 
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Authorization': 'Bearer ' + auth.accessToken
+						}
+					}
+				);
 
-    handleAddTask(title);
+				console.log(response)
+				handleAddTask(title);
+			} 
+			catch (err: unknown) {
+				const error = err as AxiosError;
+				if (error?.response) {
+					console.log(error.response)
+				}
+			}
+		}
+		postTodo();
     setTitle('');
   }
 
