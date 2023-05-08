@@ -45,10 +45,6 @@ export const Login = () => {
 		try {
 			const response = await axiosGlobal.post(LOGIN_URL,
 					JSON.stringify({ username: user, password: pass }),
-					// {
-					// 		headers: { 'Content-Type': 'application/json' },
-					// 		withCredentials: true
-					// }
 			);
 			console.log(JSON.stringify(response?.data));
 			const accessToken = response?.data?.access;
@@ -56,8 +52,9 @@ export const Login = () => {
 			setAuth({ user, pass, accessToken });
 			setUser('');
 			setPass('');
+			localStorage.setItem("access", accessToken);
 			console.log("login successful")
-			navigate(from, {replace: true});
+			navigate("/todo");
 		} 
 		catch (err: unknown) {
 			const error = err as AxiosError;
