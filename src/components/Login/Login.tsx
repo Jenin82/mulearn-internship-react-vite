@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';	
 import axiosGlobal from '../../api/axios';
 
-const LOGIN_URL = 'token/';
+const LOGIN_URL = 'login/';
 
 
 export const Login = () => {
